@@ -599,9 +599,7 @@ const CourseRecommendationQuiz = () => {
                               animate={{ opacity: [1, 0.3, 1] }}
                               transition={{ duration: 1, repeat: Infinity }}
                             />
-                            <span className="text-white text-sm font-medium capitalize">
-                              {option.track === 'javadsa' ? 'Java DSA' : option.track === 'webdev' ? 'Web Development' : 'Python'}
-                            </span>
+                           
                           </motion.div>
                         </div>
                         
@@ -931,14 +929,13 @@ const CourseRecommendationQuiz = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 1.3 }}
                       >
-                        {recommendation.title}
+                        {recommendation.title.replace(/\s*–\s*₹\d+/, '')}
                       </motion.h2>
                       <motion.span 
-                        className={`px-4 py-2 bg-gradient-to-r ${trackDetails.gradient} text-white text-sm font-bold rounded-full`}
+                        className={`px-4 py-2 bg-gradient-to-r ${trackDetails.gradient} text-white text-sm font-bold rounded-full animate-pulse`}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 1.5, type: "spring", stiffness: 200 }}
-                        animate-pulse
                       >
                         RECOMMENDED
                       </motion.span>

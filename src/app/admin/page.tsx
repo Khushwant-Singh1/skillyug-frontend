@@ -42,7 +42,7 @@ export default function AdminDashboard() {
   const stats: DashboardStats = {
     totalUsers: usersQuery.data?.meta?.pagination?.total || 156,
     totalCourses: coursesQuery.data?.meta?.pagination?.total || 3,
-    totalRevenue: 187500, // Based on course sales (₹1299, ₹1899, ₹2599)
+    totalRevenue: 187500, // Based on course sales
     monthlyGrowth: 18.5, // Growing Python demand
     featuredCourses: 3, // All Python courses are featured
     activePurchases: 89 // Active enrollments
@@ -60,7 +60,7 @@ export default function AdminDashboard() {
         description: 'Python Pro Bundle purchased',
         timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
         user: 'rahul.sharma@gmail.com',
-        course: 'Python Pro Bundle (₹2599)'
+        course: 'Python Pro Bundle'
       },
       {
         id: '2',
@@ -75,7 +75,7 @@ export default function AdminDashboard() {
         description: 'Python Beginner course purchased',
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
         user: 'amit.kumar@yahoo.com',
-        course: 'Python Beginner (₹1299)'
+        course: 'Python Beginner'
       },
       {
         id: '4',
@@ -83,7 +83,7 @@ export default function AdminDashboard() {
         description: 'Python Bundle (Beginner → Intermediate) purchased',
         timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
         user: 'sneha.agarwal@outlook.com',
-        course: 'Python Bundle (₹1899)'
+        course: 'Python Bundle'
       },
       {
         id: '5',
@@ -98,7 +98,7 @@ export default function AdminDashboard() {
         description: 'Python Pro Bundle purchased with scholarship test',
         timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
         user: 'anjali.verma@gmail.com',
-        course: 'Python Pro Bundle (₹2599)'
+        course: 'Python Pro Bundle'
       }
     ]);
   }, []);

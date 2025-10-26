@@ -235,10 +235,7 @@ export default function Courses() {
 													</div>
 												</div>
 
-												<div className="flex items-center justify-between">
-													<span className="text-2xl font-bold" style={{ color: "#EB8216" }}>
-														₹{course.price.toLocaleString("en-IN")}
-													</span>
+												<div className="flex items-center justify-end">
 													<button
 														onClick={() => handleEnrollClick(course)}
 														className="px-6 py-2 text-white rounded-lg transition-colors cursor-pointer"
