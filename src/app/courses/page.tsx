@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar';
 import { BookOpen, Clock, Users, Star, Filter, Search, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { courseAPI, type Course } from '@/lib/api';
+import { MOCK_COURSES } from '@/data/mockCourses';
 
 enum Category {
 	Programming = "PROGRAMMING",
@@ -34,8 +35,8 @@ export default function Courses() {
   const router = useRouter();
   const { user } = useAuth();
 
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<Course[]>(MOCK_COURSES);
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>(MOCK_COURSES);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
@@ -46,16 +47,27 @@ export default function Courses() {
       try {
         setLoading(true);
         const response = await courseAPI.getAll();
-        if (!response.data) {
-          toast.error('Error fetching courses. Please login again.');
-          router.push('/login?redirect=' + encodeURIComponent('/courses'));
-          return;
+        console.log('API Response:', response);
+        
+        if (response.success && response.data && response.data.length > 0) {
+          console.log('Using API data for courses');
+          setCourses(response.data);
+          setFilteredCourses(response.data);
+        } else {
+          // Use mock data as fallback
+          console.log('Using mock data for courses - no API data available');
+          toast('Showing sample courses. Connect to see live courses.', {
+            icon: '📚',
+            duration: 3000
+          });
         }
-        setCourses(response.data);
-        setFilteredCourses(response.data);
       } catch (error) {
         console.error('Error fetching courses:', error);
-        toast.error('Failed to load courses');
+        // Keep mock data as fallback on error
+        toast('Showing sample courses. Unable to fetch live courses.', {
+          icon: '📚',
+          duration: 3000
+        });
       } finally {
         setLoading(false);
       }

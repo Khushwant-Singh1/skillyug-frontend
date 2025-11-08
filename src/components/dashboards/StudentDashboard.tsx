@@ -25,16 +25,16 @@ const Sidebar = () => {
         />
       </div>
       <nav className="flex flex-col space-y-3 flex-grow">
-        <button className="w-full text-left p-3 bg-orange-500 rounded-lg font-semibold">Profile</button>
-        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg">Your Course</button>
-        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg">All Course</button>
-        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg">Quiz/Games</button>
-        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg">Contact us</button>
+        <button className="w-full text-left p-3 bg-orange-500 rounded-lg font-semibold text-white">Profile</button>
+        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg text-white">Your Course</button>
+        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg text-white">All Course</button>
+        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg text-white">Quiz/Games</button>
+        <button className="w-full text-left p-3 hover:bg-blue-800 rounded-lg text-white">Contact us</button>
       </nav>
       <div>
         <button 
           onClick={handleLogout}
-          className="w-full text-left p-3 border border-blue-700 hover:bg-blue-800 rounded-lg flex items-center space-x-2"
+          className="w-full text-left p-3 border border-blue-700 hover:bg-blue-800 rounded-lg flex items-center space-x-2 text-white"
         >
           <LogOut className="h-5 w-5" />
           <span>Log out</span>

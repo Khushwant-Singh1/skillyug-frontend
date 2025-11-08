@@ -76,21 +76,21 @@ export default function ContactUs() {
                     <Mail className="h-6 w-6 text-orange-500" />
                     <div>
                       <p className="text-gray-300">Email</p>
-                      <p className="text-white">contact@skillyug.com</p>
+                      <p className="text-white">contact@skillyug.site</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
                     <Phone className="h-6 w-6 text-orange-500" />
                     <div>
                       <p className="text-gray-300">Phone</p>
-                      <p className="text-white">+1 (555) 123-4567</p>
+                      <p className="text-white">+91 9336828814</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
                     <MapPin className="h-6 w-6 text-orange-500" />
                     <div>
                       <p className="text-gray-300">Address</p>
-                      <p className="text-white">123 Learning Street<br />Education City, EC 12345</p>
+                      <p className="text-white">Greater Noida<br />U.P.</p>
                     </div>
                   </div>
                 </div>
