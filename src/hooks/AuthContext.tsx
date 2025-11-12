@@ -43,8 +43,8 @@ const AuthContext = createContext<{
   signOut: () => Promise<void>
   forgotPassword: (email: string) => Promise<{ status: string; message: string }>;
   resetPassword: (token: string, password: string, confirmPassword: string) => Promise<{ status: string; message: string }>
-  updatePassword: (newPassword: string) => Promise<void>
-  resendVerification: (email: string) => Promise<void>
+  updatePassword: () => Promise<void>
+  resendVerification: () => Promise<void>
   verifyOtp: (email: string, otp: string) => Promise<void>
   resendOtp: (email: string) => Promise<void>
   createProfileForCurrentUser: () => Promise<boolean>
@@ -225,11 +225,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const updatePassword = async (_newPassword: string) => {
+  const updatePassword = async () => {
     toast.success('Password updated (mock)')
   }
 
-  const resendVerification = async (_email: string) => {
+  const resendVerification = async () => {
     toast.success('Verification sent (mock)')
   }
 
