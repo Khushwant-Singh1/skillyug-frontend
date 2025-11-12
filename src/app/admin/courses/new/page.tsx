@@ -67,7 +67,7 @@ export default function NewCoursePage() {
     'OTHER'
   ];
 
-  const difficulties = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
+  const difficulties = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'EXPERT'];
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -127,11 +127,11 @@ export default function NewCoursePage() {
         courseName: formData.courseName,
         description: formData.description,
         imageUrl: formData.imageUrl || 'https://via.placeholder.com/400x200',
-        price: formData.price,
-        token: formData.token,
+        price: Number(formData.price),
+        token: formData.token !== undefined ? Number(formData.token) : undefined,
         category: formData.category,
         difficulty: formData.difficulty,
-        durationHours: formData.durationHours,
+        durationHours: formData.durationHours !== undefined ? Number(formData.durationHours) : undefined,
         language: formData.language || 'English',
         isActive: formData.isActive ?? true,
         isFeatured: formData.isFeatured ?? false,

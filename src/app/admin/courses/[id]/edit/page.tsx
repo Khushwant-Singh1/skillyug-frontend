@@ -24,19 +24,20 @@ export default function CourseEditPage() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const categories = [
-    'web-development',
-    'mobile-development', 
-    'data-science',
-    'artificial-intelligence',
-    'cloud-computing',
-    'cybersecurity',
-    'design',
-    'business',
-    'marketing',
-    'other'
+    'PROGRAMMING',
+    'WEB_DEVELOPMENT',
+    'MOBILE_DEVELOPMENT',
+    'DATA_SCIENCE',
+    'ARTIFICIAL_INTELLIGENCE',
+    'CLOUD_COMPUTING',
+    'CYBERSECURITY',
+    'DESIGN',
+    'BUSINESS',
+    'MARKETING',
+    'OTHER'
   ];
 
-  const difficulties = ['beginner', 'intermediate', 'advanced'];
+  const difficulties = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'EXPERT'];
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -116,7 +117,14 @@ export default function CourseEditPage() {
     setSaving(true);
     setSubmitError(null);
     try {
-      const response = await adminCourseAPI.update(courseId, formData);
+      // Ensure numeric fields are actually numbers, not strings
+      const sanitizedData: UpdateCourseInput = {
+        ...formData,
+        price: formData.price !== undefined ? Number(formData.price) : undefined,
+        durationHours: formData.durationHours !== undefined ? Number(formData.durationHours) : undefined,
+      };
+
+      const response = await adminCourseAPI.update(courseId, sanitizedData);
       
       if (response.status === 'success') {
         setSuccessMessage('Course updated successfully!');

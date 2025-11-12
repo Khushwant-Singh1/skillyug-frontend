@@ -30,19 +30,20 @@ export default function CourseEditModal({ isOpen, onClose, onSuccess, course }: 
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const categories = [
-    'web-development',
-    'mobile-development', 
-    'data-science',
-    'artificial-intelligence',
-    'cloud-computing',
-    'cybersecurity',
-    'design',
-    'business',
-    'marketing',
-    'other'
+    'PROGRAMMING',
+    'WEB_DEVELOPMENT',
+    'MOBILE_DEVELOPMENT',
+    'DATA_SCIENCE',
+    'ARTIFICIAL_INTELLIGENCE',
+    'CLOUD_COMPUTING',
+    'CYBERSECURITY',
+    'DESIGN',
+    'BUSINESS',
+    'MARKETING',
+    'OTHER'
   ];
 
-  const difficulties = ['beginner', 'intermediate', 'advanced'];
+  const difficulties = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'EXPERT'];
 
   // Reset form when course changes
   useEffect(() => {
@@ -100,7 +101,14 @@ export default function CourseEditModal({ isOpen, onClose, onSuccess, course }: 
     setSubmitError(null);
 
     try {
-      const response = await adminCourseAPI.update(course.id, formData);
+      // Ensure numeric fields are actually numbers, not strings
+      const sanitizedData: UpdateCourseInput = {
+        ...formData,
+        price: formData.price !== undefined ? Number(formData.price) : undefined,
+        durationHours: formData.durationHours !== undefined ? Number(formData.durationHours) : undefined,
+      };
+
+      const response = await adminCourseAPI.update(course.id, sanitizedData);
       
       if (response.status === 'success') {
         onSuccess();
@@ -233,8 +241,8 @@ export default function CourseEditModal({ isOpen, onClose, onSuccess, course }: 
                 <option value="">Select a category</option>
                 {categories.map((category) => (
                   <option key={category} value={category}>
-                    {category.split('-').map(word => 
-                      word.charAt(0).toUpperCase() + word.slice(1)
+                    {category.split('_').map(word => 
+                      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
                     ).join(' ')}
                   </option>
                 ))}

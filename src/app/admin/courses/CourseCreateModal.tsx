@@ -30,19 +30,20 @@ export default function CourseCreateModal({ isOpen, onClose, onSuccess }: Course
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const categories = [
-    'web-development',
-    'mobile-development', 
-    'data-science',
-    'artificial-intelligence',
-    'cloud-computing',
-    'cybersecurity',
-    'design',
-    'business',
-    'marketing',
-    'other'
+    'PROGRAMMING',
+    'WEB_DEVELOPMENT',
+    'MOBILE_DEVELOPMENT',
+    'DATA_SCIENCE',
+    'ARTIFICIAL_INTELLIGENCE',
+    'CLOUD_COMPUTING',
+    'CYBERSECURITY',
+    'DESIGN',
+    'BUSINESS',
+    'MARKETING',
+    'OTHER'
   ];
 
-  const difficulties = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
+  const difficulties = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'EXPERT'];
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -94,7 +95,13 @@ export default function CourseCreateModal({ isOpen, onClose, onSuccess }: Course
     setSubmitError(null);
 
     try {
-      const response = await adminCourseAPI.create(formData);
+      // Ensure numeric fields are actually numbers, not strings
+      const sanitizedData: CreateCourseInput = {
+        ...formData,
+        price: Number(formData.price),
+      };
+
+      const response = await adminCourseAPI.create(sanitizedData);
       
       if (response.status === 'success') {
         onSuccess();
