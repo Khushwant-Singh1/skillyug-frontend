@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -27,6 +27,7 @@ export function VerifyOtpForm() {
   const [isResending, setIsResending] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [countdown, setCountdown] = useState(0);
+  const isSubmittingRef = useRef(false); // Track submission state to prevent duplicates
   
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -65,7 +66,13 @@ export function VerifyOtpForm() {
   }, [countdown]);
 
   const onSubmit = useCallback(async (data: OTPFormData) => {
-    if (isSubmitting) return;
+    // Prevent duplicate submissions
+    if (isSubmittingRef.current) {
+      console.log('Submission already in progress, skipping duplicate request');
+      return;
+    }
+    
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     
     try {
@@ -83,9 +90,10 @@ export function VerifyOtpForm() {
       toast.error(errorMessage);
       setValue('otp', ''); // Clear OTP field on error
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
-  }, [isSubmitting, email, router, setValue]);
+  }, [email, router, setValue]);
 
   const handleResendOTP = async () => {
     if (isResending || countdown > 0) return;
